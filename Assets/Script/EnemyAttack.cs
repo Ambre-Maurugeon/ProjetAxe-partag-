@@ -5,8 +5,13 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private float attackCooldown;
+
     [SerializeField] private Transform firePoint;
-    [SerializeField] private GameObject[] fireballs;
+    [SerializeField] private Transform firePoint2;
+
+    [SerializeField] private GameObject[] fireballs; //Pattern1
+    [SerializeField] private GameObject[] fireballs2; //Pattern2
+
     private Animator anim;
     private Enemy enemyMovement;
     private float cooldownTimer = Mathf.Infinity;
@@ -29,10 +34,21 @@ public class EnemyAttack : MonoBehaviour
         anim.SetTrigger("attack");
         cooldownTimer = 0;
         
+        //1er pattern de tirs
         foreach (var fireball in fireballs) {
             if (!fireball.activeInHierarchy) {
                 fireball.transform.position = firePoint.position;
                 fireball.GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
+                break;
+            }
+        }
+
+        //2e pattern de tirs
+        foreach (var fireball2 in fireballs2) {
+            if (!fireball2.activeInHierarchy) {
+                fireball2.transform.position = firePoint2.position;
+                //fireball2.GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
+                fireball2.GetComponent<Projectile>().CalculateDirection(transform.position, firePoint2.position);
                 break;
             }
         }
@@ -49,6 +65,7 @@ public class EnemyAttack : MonoBehaviour
         }
         return 0;
     }
+
 
 //inTrigger
     //  void OnTriggerEnter2D(Collider2D truc)

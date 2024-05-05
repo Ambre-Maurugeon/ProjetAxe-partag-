@@ -8,7 +8,7 @@ public class Life : MonoBehaviour
     public static int InitialHealth=200;
     public static int ActualHealth;
 
-    private bool invincible = false;
+    public bool invincible = false;
 
 
     [SerializeField] private Text _txtVie;

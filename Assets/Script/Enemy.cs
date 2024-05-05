@@ -13,9 +13,11 @@ public class Enemy : MonoBehaviour
     private int InitialHealth=50;
     private int ActualHealth;
 
+    //Ennemi
     private SpriteRenderer skin;
     private Rigidbody2D rb;
     private Animator anim;
+    //Player
     private GameObject player;
     private Rigidbody2D rb_player;
     private Animator animPlayer;
@@ -25,6 +27,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Vector3[] positions;
     private int index;
+
+
 
 
     void Start()
@@ -72,8 +76,9 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator AttackOpponent(int dmg){
         //if(inTrigger && Input.GetKeyDown(KeyCode.E)){
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.5f);  // attendre le temps du déclenchement de l'anim
             if(inTrigger){
+                StartCoroutine(CallPlayerInvincibility());
                 ActualHealth -= dmg;
             } 
         //}
@@ -103,7 +108,7 @@ public class Enemy : MonoBehaviour
                     ActualHealth -= 5;
                     rb_player.AddForce(Vector2.up * 3f, ForceMode2D.Impulse);    
                 }
-                else {
+                else{
                     _lifeScript.TakeDamage(damageColl);
                     //rb_player.AddForce(Vector2.down * 5f, ForceMode2D.Impulse);
                 }
@@ -120,6 +125,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    
+    private IEnumerator CallPlayerInvincibility(){
+        Debug.Log("début d'invicibilité");
+        player.GetComponent<Life>().invincible = true; //tps d'invincibilité à check 
+        yield return new WaitForSeconds(0.5f);
+        player.GetComponent<Life>().invincible = false;
+        Debug.Log("fin d'invicibilité");
+    }
+
+    //Visuals
     void animCheck() {
         anim.SetBool("Move", positions.Length != 0);
     }
