@@ -43,7 +43,7 @@ public class Projectile : MonoBehaviour
     }
    }
 
-//Direction droite gauche
+//Direction droite gauche (Pattern1)
    public void SetDirection(float _direction)
    {
     lifetime =0;
@@ -61,7 +61,7 @@ public class Projectile : MonoBehaviour
     transform.localScale = new Vector3(localScaleX,transform.localScale.y,transform.localScale.z);    
    }
 
-//Follow FirePoint
+//Follow FirePoint (Pattern2)
    public void CalculateDirection(Vector3 enemyPosition, Vector3 firePointPosition)
     {
         lifetime = 0;

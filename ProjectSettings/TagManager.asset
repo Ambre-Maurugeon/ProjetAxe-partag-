@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - wall
+  - GlobalVolume
   layers:
   - Default
   - TransparentFX
