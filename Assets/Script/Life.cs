@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 
 public class Life : MonoBehaviour
 {
-    public static int InitialHealth=200;
+    public static int InitialHealth=100;
     public static int ActualHealth;
     
     [Header("Saturation")]
