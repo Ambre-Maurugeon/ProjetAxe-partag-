@@ -131,7 +131,7 @@ public class Controls : MonoBehaviour
             _moveDirX = -1f;
         }
         if (Input.GetKey(KeyCode.D)){
-            Debug.Log(_orientX);
+            //Debug.Log(_orientX);
             _moveDirX = 1f;
         }
     }
@@ -188,13 +188,13 @@ public class Controls : MonoBehaviour
             
             horizontal = 9*_orientX;
             velocity.y = 6;
-            Debug.Log("orientX " + _orientX);
+            //Debug.Log("orientX " + _orientX);
 
             //_rb.velocity = velocity;
             _rb.velocity = new Vector2(horizontal, 6f);
 
         } else if(!grounded) {
-            Debug.Log("tombe"); 
+            //Debug.Log("tombe"); 
         }
         else if (grounded){
             IsWallJumping = false;

@@ -5,12 +5,19 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Text _txtVie;
+    [Header("Defense")]
+    [SerializeField] private int InitialHealth=50;
+
+    [Header("Attaque")]
     [SerializeField] private int damageColl;
-    private Life _lifeScript;   //recup script vie player
+
+    [Header("UI")]
+    [SerializeField] private Text _txtVie;
+
+    private Life _lifeScript;   //recup script vie player pr la fonction TakeDamage()
 
     private bool inTrigger=false;
-    private int InitialHealth=50;
+    
     private int ActualHealth;
 
     //Ennemi
@@ -58,6 +65,11 @@ public class Enemy : MonoBehaviour
     {
         animCheck();
         if(ActualHealth <= 0){
+                // if (anim.HasTrigger("mort")){
+                //     anim.SetTrigger("mort");
+                // }
+                //Invoke("Destroy(gameObject)",1f);
+
                 Destroy(gameObject);
             }
         if (positions.Length != 0){
@@ -90,7 +102,7 @@ public class Enemy : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, positions[index], 3 * Time.deltaTime);
         if (transform.position == positions[index]){
             skin.flipX = !skin.flipX;
-            // si l'index atteint la fin de la liste finie reco
+            // si l'index atteint la fin de la liste, recommencer
             if(index == positions.Length-1) {
                 index = 0;
             }
@@ -136,7 +148,9 @@ public class Enemy : MonoBehaviour
 
     //Visuals
     void animCheck() {
-        anim.SetBool("Move", positions.Length != 0);
+        if(positions.Length != 0){
+            anim.SetBool("Move", positions.Length != 0);
+        }   
     }
 
     void RefreshUI(){

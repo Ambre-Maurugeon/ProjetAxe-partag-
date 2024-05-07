@@ -39,7 +39,7 @@ public class ArbreVie : MonoBehaviour
         if (Life.ActualHealth<Life.InitialHealth){
             Life.ActualHealth +=1;
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.15f);
         }
     }
 
